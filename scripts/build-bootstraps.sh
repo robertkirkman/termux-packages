@@ -32,7 +32,7 @@ TERMUX_PACKAGE_MANAGERS=("apt" "pacman")
 # The default is 'apt'. Can be changed by using the '--pm' option.
 TERMUX_PACKAGE_MANAGER="apt"
 
-TERMUX_PACKAGES_DIRECTORY="/home/builder/termux-packages"
+TERMUX_PACKAGES_DIRECTORY=$(find / -name termux-packages 2>/dev/null | head -n1)
 TERMUX_BUILT_PKGS_DIRECTORY="$TERMUX_PACKAGES_DIRECTORY/output"
 TERMUX_BUILT_PACKAGES_DIRECTORY="/data/data/.built-packages"
 

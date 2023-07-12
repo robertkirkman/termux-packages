@@ -31,6 +31,8 @@ declare -A REPO_BASE_URLS=(
 # The default is 'apt'. Can be changed by using the '--pm' option.
 TERMUX_PACKAGE_MANAGER="apt"
 
+TERMUX_PACKAGES_DIRECTORY=$(find / -name termux-packages 2>/dev/null | head -n1)
+
 # The repository base url for package manager.
 # Can be changed by using the '--repository' option.
 REPO_BASE_URL="${REPO_BASE_URLS[${TERMUX_PACKAGE_MANAGER}]}"
@@ -117,7 +119,7 @@ pull_package() {
 	local package_name=$1
 	local package_tmpdir="${BOOTSTRAP_PKGDIR}/${package_name}"
 	mkdir -p "$package_tmpdir"
-	echo "${package_name}" >> /home/builder/termux-packages/bootstrap_package_names.txt
+	echo "${package_name}" >> "$TERMUX_PACKAGES_DIRECTORY/bootstrap_package_names.txt"
 
 	if [ ${TERMUX_PACKAGE_MANAGER} = "apt" ]; then
 		local package_url
