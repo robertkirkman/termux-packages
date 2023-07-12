@@ -1,5 +1,6 @@
 #!/bin/bash
 RESTART_INSTRUCTIONS="Dropping to shell. To restart, swipe from the top of your screen, touch the arrow on the right side of your Termux Notificiation, touch "Exit", then relaunch this app."
+termux-setup-storage
 # https://stackoverflow.com/questions/34457830/press-any-key-to-abort-in-5-seconds
 if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key #key in a sense has no use at all
 then
@@ -30,7 +31,6 @@ EOF
 	echo $RESTART_INSTRUCTIONS
 	exit 2
 fi
-termux-setup-storage
 apt-mark hold bash
 yes | pkg upgrade -y
 yes | pkg install git wget make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd
@@ -48,7 +48,8 @@ else
 	cp "${BASEROM_PATH}" sm64ex-coop/baserom.us.z64
 	cd sm64ex-coop
 fi
-if make 2>&1 | tee build.log
+make 2>&1 | tee build.log
+if ! [ -f build/us_pc/sm64.us.apk ]
 then
 	cat <<EOF
 ____ ____ _ _    _  _ ____ ____ 
