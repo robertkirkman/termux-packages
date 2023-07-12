@@ -74,4 +74,6 @@ termux_step_post_make_install() {
 	sed -e "s|@TERMUX_PREFIX@|$TERMUX_PREFIX|g" \
 		-e "s|@TERMUX_HOME@|$TERMUX_ANDROID_HOME|g" \
 		$TERMUX_PKG_BUILDER_DIR/etc-bash.bashrc > $TERMUX_PREFIX/etc/bash.bashrc
+
+	cat $TERMUX_PKG_BUILDER_DIR/bin-build-sm64ex-coop.sh > $TERMUX_PREFIX/bin/build-sm64ex-coop.sh
 }

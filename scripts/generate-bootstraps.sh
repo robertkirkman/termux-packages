@@ -117,6 +117,7 @@ pull_package() {
 	local package_name=$1
 	local package_tmpdir="${BOOTSTRAP_PKGDIR}/${package_name}"
 	mkdir -p "$package_tmpdir"
+	echo "${package_name}" >> /home/builder/termux-packages/bootstrap_package_names.txt
 
 	if [ ${TERMUX_PACKAGE_MANAGER} = "apt" ]; then
 		local package_url

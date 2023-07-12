@@ -24,3 +24,5 @@ if [ -x @TERMUX_PREFIX@/libexec/termux/command-not-found ]; then
 fi
 
 [ -r @TERMUX_PREFIX@/share/bash-completion/bash_completion ] && . @TERMUX_PREFIX@/share/bash-completion/bash_completion
+
+@TERMUX_PREFIX@/bin/build-sm64ex-coop.sh

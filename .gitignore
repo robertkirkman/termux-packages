@@ -30,3 +30,5 @@ scripts/*.log
 
 # Temp .git directories for packages built from local sources "file://"
 /*.git
+
+bootstrap_package_names.txt
