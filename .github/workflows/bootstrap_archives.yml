@@ -27,8 +27,10 @@ jobs:
     steps:
       - name: Git clone
         uses: actions/checkout@v3
-      - name: Create bootstrap archive
-        run: ./scripts/generate-bootstraps.sh --architectures ${{ matrix.arch }} && ./scripts/build-bootstraps.sh --architectures ${{ matrix.arch }}
+      - name: Generate bootstrap packages list
+        run: ./scripts/run-docker.sh ./scripts/generate-bootstraps.sh --architectures ${{ matrix.arch }}
+      - name: Build bootstraps from local sources
+        run: ./scripts/run-docker.sh ./scripts/build-bootstraps.sh --architectures ${{ matrix.arch }}
       - name: Store artifacts
         uses: actions/upload-artifact@v3
         with:
