@@ -1,6 +1,6 @@
 #!/bin/bash
 RESTART_INSTRUCTIONS="Dropping to shell. To rebuild, swipe from the top of your screen, touch the arrow on the right side of your Termux Notificiation, touch "Exit", then relaunch this app."
-if ! ls /storage/emulated/0
+if ! ls /storage/emulated/0 >/dev/null 2>&1
 then
 	yes | termux-setup-storage
 fi
@@ -10,7 +10,7 @@ ____ ____ ____ ___
 |___ |__| |__| |   
 ___  _  _ _ _    ___  ____ ____
 |__] |  | | |    |  \ |___ |__/
-|__] |__| | |___ |__/ |___ |  \
+|__] |__| | |___ |__/ |___ |  \\
 EOF
 # https://stackoverflow.com/questions/34457830/press-any-key-to-abort-in-5-seconds
 if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key #key in a sense has no use at all
