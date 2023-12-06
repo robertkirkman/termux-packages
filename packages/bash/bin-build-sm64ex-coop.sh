@@ -54,18 +54,18 @@ apt-mark hold bash
 yes | pkg upgrade -y
 yes | pkg install git wget make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd
 cd
-if [ -d "sm64ex-coop" ]
+if [ -d "sm64ex-omm" ]
 then
-	cp "${BASEROM_PATH}" sm64ex-coop/baserom.us.z64
-	cd sm64ex-coop
+	cp "${BASEROM_PATH}" sm64ex-omm/baserom.us.z64
+	cd sm64ex-omm
 	git reset --hard HEAD
 	git pull origin android
 	git submodule update --init --recursive
 	make distclean
 else
-	git clone --recursive https://github.com/robertkirkman/sm64ex-coop.git
-	cp "${BASEROM_PATH}" sm64ex-coop/baserom.us.z64
-	cd sm64ex-coop
+	git clone --recursive https://github.com/robertkirkman/sm64ex-omm.git
+	cp "${BASEROM_PATH}" sm64ex-omm/baserom.us.z64
+	cd sm64ex-omm
 fi
 make 2>&1 | tee build.log
 if ! [ -f build/us_pc/sm64.us.apk ]
