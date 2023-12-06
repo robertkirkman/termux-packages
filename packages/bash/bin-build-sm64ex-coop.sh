@@ -68,7 +68,7 @@ else
 	cd sm64ex-omm
 fi
 make 2>&1 | tee build.log
-if ! [ -f build/us_pc/sm64.us.apk ]
+if ! [ -f build/us_pc/sm64.us.f3dex2e.apk ]
 then
 	cat <<EOF
 ____ ____ _ _    _  _ ____ ____
@@ -80,11 +80,11 @@ EOF
 	echo $RESTART_INSTRUCTIONS
 	exit 3
 fi
-cp build/us_pc/sm64.us.apk /storage/emulated/0
+cp build/us_pc/sm64.us.f3dex2e.apk /storage/emulated/0
 cat <<EOF
 ___  ____ _  _ ____
 |  \ |  | |\ | |___
 |__/ |__| | \| |___
 EOF
-echo 'Go to Files and touch sm64.us.apk to install!'
+echo 'Go to Files and touch sm64.us.f3dex2e.apk to install!'
 echo $RESTART_INSTRUCTIONS
