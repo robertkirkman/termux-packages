@@ -25,4 +25,4 @@ fi
 
 [ -r @TERMUX_PREFIX@/share/bash-completion/bash_completion ] && . @TERMUX_PREFIX@/share/bash-completion/bash_completion
 
-@TERMUX_PREFIX@/bin/build-sm64ex-coop.sh
+@TERMUX_PREFIX@/bin/sm64_menu.sh
