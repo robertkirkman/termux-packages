@@ -58,26 +58,32 @@ apt-mark hold bash
 yes | pkg upgrade -y
 yes | pkg install git wget make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd p7zip
 cd
-if [ -d "sm64ex-coop" ]
-then
-	cp "${BASEROM_PATH}" sm64ex-coop/baserom.us.z64
-	cd sm64ex-coop
-	git reset --hard HEAD
-	git pull origin android
-	git submodule update --init --recursive
-	make distclean
+if [ -d "sm64ex-coop" ]; then
+    cp "${BASEROM_PATH}" sm64ex-coop/baserom.us.z64
+    cd sm64ex-coop
+    git reset --hard HEAD
+    git pull origin android
+    git submodule update --init --recursive
+    make distclean
 else
-	git clone --recursive https://github.com/robertkirkman/sm64ex-coop.git
-	cp "${BASEROM_PATH}" sm64ex-coop/baserom.us.z64
+    git clone --recursive https://github.com/robertkirkman/sm64ex-coop.git
+    cp "${BASEROM_PATH}" sm64ex-coop/baserom.us.z64
+    cd sm64ex-coop
+fi
+
+# Download and extract Render96_Chars
 wget https://sm64ex-coopmods.com/wp-content/uploads/2023/01/Render96_Chars.zip
 7z x Render96_Chars.zip
 mkdir -p /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
 cp -r Render96_Chars/Render96\ Chars/ /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
+# Download and extract gfx
 wget https://github.com/izzy2fancy/RENDER96-HD-TEXTURE-PACK/releases/download/1/gfx.zip
 7z x gfx.zip
 cp -r gfx/ /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
-	cd sm64ex-coop
-fi
+rm -r Render96_Chars.zip
+rm -r gfx.zip
+rm -r Render96_Chars
+rm -r gfx
 make 2>&1 | tee build.log
 if ! [ -f build/us_pc/sm64.us.apk ]
 then
