@@ -258,6 +258,7 @@ _fetch_and_cache_tags() {
 	local -A __GITHUB_CURRENT_TAGS=()
 	[[ "${CI-false}" == "true" ]] && echo "::group::INFO: Skipping the following up-to-date packages" || :
 	local pkg_type pkg_name version
+	echo "update-packages computed GitHub tags pre-loop: $LATEST_TAGS_GITHUB" >> /home/runner/test.log
 	while IFS='|' read -r pkg_type pkg_name version; do
 		case "${pkg_type}" in
 			"LOCAL") # Local package version for a GitHub GraphQL request.
@@ -275,6 +276,7 @@ _fetch_and_cache_tags() {
 				echo "INFO: Skipping ${pkg_name}: already at version ${version}"
 			;;
 		esac
+		echo "update-packages '$pkg_name' computed GitHub tags post-loop: $version" >> /home/runner/test.log
 		_LATEST_TAGS["${pkg_name:-_}"]="$version"
 	done < <(printf '%s\n' "$LATEST_TAGS" "$LATEST_TAGS_GITHUB")
 	[[ "${CI-false}" == "true" ]] && echo "::endgroup::" || :
