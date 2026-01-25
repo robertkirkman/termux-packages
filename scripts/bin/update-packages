@@ -191,6 +191,8 @@ _fetch_and_cache_tags() {
 			fi
 		fi
 
+		echo "update-packages '$pkg_dir' computed tag type: $TAG_TYPE" >> /home/runner/test.log
+
 		# We prepare the query snippets for `termux_github_graphql` here
 		# since we already have the needed information available.
 		GITHUB_GRAPHQL_QUERIES+=( "_$((COUNTER++)): repository(owner: \\\"${user}\\\", name: \\\"${repo}\\\") { ..._${TAG_TYPE//-/_} }" )
@@ -488,6 +490,8 @@ printf '%s\n' "${_ALREADY_SEEN[@]}" | grep -ve '^$' | sort
 echo ""
 echo "SUMMARY: ${#_FAILED_UPDATES[*]} failed updates."
 echo "${!_FAILED_UPDATES[@]}"
+
+cat /home/runner/test.log
 
 unset IPC_FIFO IPC_FIFO_FD _unix_millis _start_time _pkg total direct indirect
 

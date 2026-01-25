@@ -29,6 +29,8 @@ termux_github_api_get_tag() {
 		fi
 	fi
 
+	echo "termux_github_api_get_tag '$project' computed tag type: $tag_type" >> /home/runner/test.log
+
 	local -a curl_opts=(
 		-H "X-GitHub-Api-Version: 2022-11-28"
 		-H "Accept: application/vnd.github.v3+json"
