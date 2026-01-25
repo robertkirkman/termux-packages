@@ -30,7 +30,7 @@ jobs:
     permissions:
       contents: read
     if: github.event_name == 'pull_request' || github.event_name == 'push'
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04
     steps:
       - name: Clone repository
         uses: actions/checkout@v6
