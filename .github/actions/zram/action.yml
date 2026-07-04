@@ -53,12 +53,9 @@ runs:
 
         LINUX_CHECKOUT_DIR=$(mktemp -d)
         cd "$LINUX_CHECKOUT_DIR"
-        curl -OL "https://cdn.kernel.org/pub/linux/kernel/v${KERNEL_VERSION%%\.*}.x/linux-${TAR_KERNEL_VERSION}.tar.xz"
-        curl -OL "https://cdn.kernel.org/pub/linux/kernel/v${KERNEL_VERSION%%\.*}.x/linux-${TAR_KERNEL_VERSION}.tar.sign"
+        curl -OL "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/snapshot/linux-7.0.tar.gz"
 
-        gpg --import ${{ github.workspace }}/scripts/linux-kernel-signing-keys.gpg
-        unxz "linux-${TAR_KERNEL_VERSION}.tar.xz"
-        gpg --verify "linux-${TAR_KERNEL_VERSION}.tar.sign"
+        gunzip "linux-7.0.tar.gz"
         tar --extract -f "linux-${TAR_KERNEL_VERSION}.tar"
         cd "linux-${TAR_KERNEL_VERSION}/"
 
